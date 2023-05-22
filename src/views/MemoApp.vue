@@ -10,14 +10,14 @@
           {{ index }}:{{ memo.text }}
         </div>
         <div v-else class="memo__text">{{ index }}:{{ memo.text }}</div>
-        <button v-on:click="deletebutton(index)" class="memo__delete">
+        <button v-on:click="deleteButton(index)" class="memo__delete">
           削除
         </button>
       </li>
     </ul>
     <div class="add-memo-field">
-      <input class="add-memo-field__input" type="text" v-model="textmemo" />
-      <button v-on:click="addbutton" class="add-memo-field__button">
+      <input class="add-memo-field__input" type="text" v-model="textMemo" />
+      <button v-on:click="addButton" class="add-memo-field__button">
         追加
       </button>
     </div>
@@ -28,31 +28,18 @@
 export default {
   data() {
     return {
-      textmemo: " ",
-      memos: [
-        {
-          text: "ひき肉を300g買う",
-          isDone: false,
-        },
-        {
-          text: "ホウレンソウを1束買う",
-          isDone: false,
-        },
-        {
-          text: "ピーマンを2個買う",
-          isDone: false,
-        },
-      ],
+      textMemo: " ",
+      memos: [],
     }
   },
   methods: {
-    addbutton: function () {
+    addButton: function () {
       this.memos.push({
-        text: this.textmemo,
+        text: this.textMemo,
         isDone: false,
       })
     },
-    deletebutton: function (index) {
+    deleteButton: function (index) {
       this.memos.splice(index, 1)
     },
   },
