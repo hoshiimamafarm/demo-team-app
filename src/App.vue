@@ -3,6 +3,7 @@
   <main class="main-view">
     <router-view />
     <div>テスト</div>
+    <div>テスト</div>
   </main>
   <Footer />
 </template>
