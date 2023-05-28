@@ -2,12 +2,14 @@
   <h1>Vue メモ</h1>
   <div class="memo-list">
     <ul class="memo-list__container">
+      <!-- MemoOutputのdeleteButtonをMemoApp.vueに持ってくる -->
       <memoOutput
         v-for="(memo, index) in memos"
         v-bind:key="index"
         class="memo"
         v-bind:memo="memo"
         v-bind:index="index"
+        @onclick="deleteButton"
       ></memoOutput>
     </ul>
     <div class="add-memo-field">
@@ -20,7 +22,7 @@
 </template>
 
 <script>
-import MemoOutput from "@/components/MemoOutput.vue"
+import MemoOutput from "../components/MemoOutput.vue"
 export default {
   components: {
     memoOutput: MemoOutput,
@@ -36,6 +38,10 @@ export default {
       this.memos.push({
         text: this.textMemo,
       })
+    },
+    //deleteButtonを押すとMemoOutoputで伝えられたindexのmemoが消える
+    deleteButton: function (index) {
+      this.memos.splice(index, 1)
     },
   },
 }
@@ -57,19 +63,6 @@ export default {
   padding: 0;
 }
 
-/* .memo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem;
-  border-radius: 5px;
-}
-
-.memo:hover {
-  color: white;
-  background-color: #b23b61;
-} */
-
 .add-memo-field {
   display: flex;
   flex-direction: column;
@@ -90,26 +83,4 @@ export default {
   background-color: #b2ae3b;
   border-radius: 5px;
 }
-
-/* .memo__text {
-  margin-left: 2rem;
-  text-align: left;
-}
-
-.memo__text--done {
-  text-decoration-line: line-through;
-}
-
-.memo__delete {
-  margin-left: 1rem;
-  padding: 0.5rem 0.5rem;
-  border: solid 1px black;
-  border-radius: 5px;
-  background-color: white;
-}
-
-.memo__delete:hover {
-  background-color: #b2ae3b;
-  border-radius: 5px;
-} */
 </style>

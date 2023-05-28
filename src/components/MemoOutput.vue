@@ -20,8 +20,11 @@ export default {
     }
   },
   methods: {
+    //deleteButtonが押されたらmemoが消える
+    //押されたdeleteButtonのindexをMemoApp.vueに伝える
+    //MemoApp.vueでmemoを消す
     deleteButton: function (index) {
-      this.memos.splice(index, 1)
+      this.$emit("onclick", index)
     },
   },
 }
