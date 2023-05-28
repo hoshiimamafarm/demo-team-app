@@ -2,18 +2,15 @@
   <h1>Vue メモ</h1>
   <div class="memo-list">
     <ul class="memo-list__container">
-      <li v-for="(memo, index) in memos" v-bind:key="index" class="memo">
-        <div class="memo__checkbox">
-          <input type="checkbox" v-model="memo.isDone" />
-        </div>
-        <div v-if="memo.isDone" class="memo__text memo__text--done">
-          {{ index }}:{{ memo.text }}
-        </div>
-        <div v-else class="memo__text">{{ index }}:{{ memo.text }}</div>
-        <button v-on:click="deleteButton(index)" class="memo__delete">
-          削除
-        </button>
-      </li>
+      <!-- MemoOutputのdeleteButtonをMemoApp.vueに持ってくる -->
+      <memoOutput
+        v-for="(memo, index) in memos"
+        v-bind:key="index"
+        class="memo"
+        v-bind:memo="memo"
+        v-bind:index="index"
+        @onclick="deleteButton"
+      ></memoOutput>
     </ul>
     <div class="add-memo-field">
       <input class="add-memo-field__input" type="text" v-model="textMemo" />
@@ -25,7 +22,11 @@
 </template>
 
 <script>
+import MemoOutput from "../components/MemoOutput.vue"
 export default {
+  components: {
+    memoOutput: MemoOutput,
+  },
   data() {
     return {
       textMemo: " ",
@@ -36,9 +37,9 @@ export default {
     addButton: function () {
       this.memos.push({
         text: this.textMemo,
-        isDone: false,
       })
     },
+    //deleteButtonを押すとMemoOutoputで伝えられたindexのmemoが消える
     deleteButton: function (index) {
       this.memos.splice(index, 1)
     },
@@ -60,41 +61,6 @@ export default {
 
 .memo-list__container {
   padding: 0;
-}
-
-.memo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem;
-  border-radius: 5px;
-}
-
-.memo:hover {
-  color: white;
-  background-color: #b23b61;
-}
-
-.memo__text {
-  margin-left: 2rem;
-  text-align: left;
-}
-
-.memo__text--done {
-  text-decoration-line: line-through;
-}
-
-.memo__delete {
-  margin-left: 1rem;
-  padding: 0.5rem 0.5rem;
-  border: solid 1px black;
-  border-radius: 5px;
-  background-color: white;
-}
-
-.memo__delete:hover {
-  background-color: #b2ae3b;
-  border-radius: 5px;
 }
 
 .add-memo-field {
