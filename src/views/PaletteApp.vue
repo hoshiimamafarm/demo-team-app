@@ -3,8 +3,8 @@
   <div class="app">
     <div
       class="palette"
-      v-on:mousemove="changecolor"
-      v-on:click="pickcolor"
+      v-on:mousemove="changeColor"
+      v-on:click="pickColor"
       v-bind:style="paletteStyle"
     ></div>
     <p>rgba( {{ red }}, {{ green }}, 200, 0.5 )</p>
@@ -16,7 +16,7 @@
         v-bind:style="{
           backgroundColor: `rgba(${color.red}, ${color.green}, 200, 0.5)`,
         }"
-        v-on:click="showcolor(color)"
+        v-on:click="showColor(color)"
       ></div>
     </div>
   </div>
@@ -32,18 +32,18 @@ export default {
     }
   },
   methods: {
-    changecolor(m) {
-      this.red = m.offsetX
-      this.green = m.offsetY
+    changeColor(element) {
+      this.red = element.offsetX
+      this.green = element.offsetY
     },
-    pickcolor() {
-      const newcolor = {
+    pickColor() {
+      const newColor = {
         red: this.red,
         green: this.green,
       }
-      this.color.push(newcolor)
+      this.color.push(newColor)
     },
-    showcolor(color) {
+    showColor(color) {
       this.red = color.red
       this.green = color.green
     },
